@@ -1,0 +1,160 @@
+@import "base";
+
+// Use animations
+$use-fadeInDown: true;
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  background-color: $white;
+  -webkit-backface-visibility: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+}
+
+.title {
+  position: relative;
+  display: table;
+  padding: 110px 10px 70px 10px;
+  width: 100%;
+  background-color: $blue;
+  &__content {
+    display: table-cell;
+    vertical-align: middle;
+    color: $white;
+    text-align: center;
+    font-weight: 100;
+    h1, h2, h3, h4 {
+      color: $white;
+      font-weight: 300;
+    }
+    h1 {
+      @media (min-width: $screen-sm-min) {
+        font-size: 58px
+      }
+      @media (min-width: $screen-md-min) {
+        font-size: 68px
+      }
+    }
+    a {
+      color: $white;
+      text-decoration: underline;
+    }
+    .btn {
+      margin: 10px 0;
+    }
+  }
+}
+
+// Sections
+.section.categories {
+  padding-bottom: 30px;
+}
+.section.daily-question {
+  position: relative;
+  background-color: #e0ffff;
+  .table-cell {
+    padding-bottom: 50px;
+  }
+  h2 {
+    margin-bottom: 30px;
+  }
+  .teacher-image {
+    position: relative;
+    & img {
+      display: none;
+      @media (min-width: $screen-md-min) {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        right: 25%;
+        height: 400px;
+      }
+    }
+  }
+  .question {
+    //background-color: $white;
+  }
+}
+
+// Cards
+
+.card--category-grammar {
+  @include card($green);
+}
+
+.card--category-vocab {
+  @include card($pink);
+}
+
+.card--category-listening {
+  @include card($blue);
+}
+
+.card--category-reading {
+   @include card($yellow);
+ }
+.card--category-phrases {
+  @include card($pink);
+}
+
+// Rating
+.rating {
+  @extend .clearfix;
+  float: left;
+  display: block;
+  padding:0;margin:0;list-style:none;
+  li {
+    padding:0;margin:0;list-style:none;
+    float: left;
+  }
+  i {
+    background: lightcyan;
+    border-radius: 50%;
+    color: $yellow;
+    font-size: 32px;
+  }
+}
+
+// Tags
+.tags {
+  @extend .clearfix;
+  padding:0;margin:0;list-style:none;
+  li {
+    padding:0;margin:0;list-style:none;
+    float: left;
+    margin-right: 5px;
+  }
+  a {
+    display: inline-block;
+    background-color: $blue;
+    color: $white;
+    border-radius: 3px;
+    padding: 3px 10px;
+  }
+}
+
+// Table layout
+.table-row {
+  display: block;
+  @media (min-width: $screen-md-min) {
+    display: table;
+  }
+}
+.table-cell {
+  @media (min-width: $screen-md-min) {
+    display: table-cell;
+    vertical-align: middle;
+    width: 50%;
+  }
+}
+
+
+// Footer
+footer.global {
+  color: $white;
+  background-color: $blue;
+  padding: 10px 0px;
+}

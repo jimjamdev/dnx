@@ -1,0 +1,25 @@
+
+@mixin small {
+  @include susy-media(35em) {
+    @content;
+  }
+}
+
+
+@mixin medium {
+  @include susy-media(45em) {
+    @content;
+  }
+  .ie8 & {
+    @content;
+    // We want to show this for the older IE8 browser that doesnt support media queries. This way we can get rid of respond.js and still give older IE users a fast and pleasant experience.
+    // We can also use the .ie8 tag to target older version of IE without Modernizr. Altogether, thats a saving of over 100k.
+  }
+}
+
+@mixin large {
+  @include susy-media(80em) {
+    @content;
+  }
+}
+

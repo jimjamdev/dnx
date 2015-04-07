@@ -1,0 +1,10 @@
+$pad: 15px;
+$grid-columns: 12 !default;
+$grid-gutters: 0.75 !default;
+$global-box-sizing: border-box;
+
+// Susy layouts
+$susy: (flow: ltr,
+        columns: $grid-columns,
+        gutters: $grid-gutters,
+        gutter-position: inside);

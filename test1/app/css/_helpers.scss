@@ -1,0 +1,28 @@
+// px to rem
+
+@mixin font-size($sizeValue: 1.6) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
+}
+
+// Clearfix
+
+%clearfix {
+  zoom: 1;
+  &:before, &:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+%responsive-img {
+  display: block;
+  width:100%;
+  height: auto;
+  margin: 0 auto;
+}

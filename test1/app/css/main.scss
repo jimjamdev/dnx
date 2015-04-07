@@ -1,0 +1,169 @@
+@import "base";
+
+// Some defaults ------------------
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  background-color: $green;
+  -webkit-backface-visibility: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+}
+
+.container {
+  @include container(90em);
+  padding-left: $pad;
+  padding-right: $pad;
+}
+
+// Links
+
+a {
+  color: $black;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+// Layout -----------------------
+
+/* Header */
+header {
+  text-align: center;
+  h1 {
+    color: $white;
+    @include font-size(2);
+    margin: 1em 0em;
+    line-height: 0;
+    @include medium {
+      @include font-size(4);
+    }
+    @include fadeInDown();
+  }
+}
+
+/* Nav Blocks
+* Lets create these with placeholders and mixins to share as much code as possible
+*/
+.blocks {
+  @extend %clearfix;
+}
+%block {
+  // Susy grids
+  @include span(12 of 12);
+  // This medium mixin contains a media query for medium sized screens. But also outputs an IE8 version for desktop only IE8.
+  @include medium {
+    @include span(4 of 12);
+  }
+  display: inline-block;
+  height: 210px;
+  padding: 70px 15px;
+  margin-bottom: $pad;
+  text-align: center;
+}
+
+@mixin block($bgcolor: $black) {
+  @extend %block;
+  background-color: $bgcolor;
+  transition: background 0.3s ease-in-out;
+  &:hover,&:focus {
+    background-color: lighten($bgcolor, 7%);
+    .sprite {
+      @include rubberBand()
+    }
+  }
+}
+
+.block--red {
+  @include block($red);
+}
+.block--blue {
+  @include block($blue);
+}
+.block--yellow-dark {
+  @include block($yellow-dark);
+}
+
+/* Sprites
+* Lets create these with placeholders and mixins to share as much code as possible.
+* This isn't the best format (PNG) for responsive though. If we're working with IE9+ we should be able to use SVG. Or if <IE9 img src-set (Just falls back on older browsers), picture element or a css media query (Not preferred now).
+*/
+
+
+%sprite {
+  background: url('../images/pictos.png') no-repeat;
+  width: 100px;
+  height: 70px;
+  margin: auto;
+}
+
+@mixin sprite($pos1: 0, $pos2:0) {
+  @extend %sprite;
+  background-position: $pos1 $pos2;
+}
+
+.sprite--chat {
+  @include sprite(center, -65px);
+}
+.sprite--phone {
+  @include sprite(center, 5px);
+}
+.sprite--search {
+  @include sprite(center, -130px);
+}
+
+/* Article */
+
+article {
+  // Default article styles
+  @extend %clearfix;
+  background-color: $yellow;
+  padding: 5px;
+  margin-bottom: $pad;
+  @include font-size(1.4);
+  @include medium {
+    min-height: 350px;
+  }
+  // Text
+  .text {
+    @include span(12 of 12);
+    padding:20px;
+    @include medium {
+      @include span(10 of 12);
+      padding:20px;
+    }
+    padding:0;
+  }
+  // Image
+  .image {
+    padding:0;
+    text-align: right;
+    @include span(12 of 12);
+    padding:0;
+    @include medium {
+      @include span(2 of 12);
+      padding:0;
+    }
+    img {
+      @extend %responsive-img;
+    }
+  }
+}
+// Link button
+.btn-link {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  @include medium {
+    text-align: left;
+    padding:0;
+  }
+  img {
+    margin-left: $pad;
+    vertical-align: middle;
+  }
+}

@@ -1,242 +1,122 @@
-<!doctype html>
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html id="html" class="no-js ie8" lang="en" data-type="home" data-tag="main"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html id="html" class="no-js modern" lang="en" data-type="home" data-tag="main">
+<!--<![endif]-->
 <html>
 <head>
-    <title>Learn English</title>
+    <title>Test 2</title>
     <meta name="theme-color" content="#000">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <!-- build:css styles/main.bundle.css -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="bower_components/owl-carousel2/dist/assets/owl.carousel.css">
     <link rel="stylesheet" href="bower_components/owl-carousel2/dist/assets/owl.theme.default.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/fonts.css">
     <!-- endbuild -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
-    <script src="//use.typekit.net/dcq7ybg.js"></script>
-    <script>try {
-        Typekit.load();
-    } catch (e) {
-    }</script>
 </head>
 <body>
-<nav class="navbar navbar-fixed-top">
+<script type='text/x-handlebars' data-template-name='application'>
+
+    {{outlet}}
+
+</script>
+
+<script type='text/x-handlebars' data-template-name='girls'>
+
+    <header>
+        <h1>Cliquez sur la fille de votre choix pour afficher son profil</h1>
+
+    </header>
     <div class="container">
-        <div class="navbar-header">
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-more-nav">
-                <span class="sr-only">Toggle more menu</span>
-                <i class="md-more-vert"></i>
-            </button>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-search-nav">
-                <span class="sr-only">Toggle search</span>
-                <i class="md-search"></i>
-            </button>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-main-nav">
-                <span class="sr-only">Toggle main menu</span>
-                <i class="md-menu"></i>
-            </button>
-            <a class="navbar-brand" href="/">Learn English</a>
-        </div>
+        <!-- Girl picker carousel -->
+        <nav class="profiles">
+            {{#owl-carousel}}
+            {{#each}}
+            <div class="item">{{#link-to 'girl' this}}<img src="images/{{id}}.jpg">{{/link-to}}</div>
+            {{/each}}
 
-        <nav class="navbar-right">
-            <!-- Main Menu -->
-            <div class="collapse navbar-collapse" id="js-main-nav">
-                <ul class="nav navbar-nav">
-                    <li><a href="#">Grammar</a></li>
-                    <li><a href="#">Vocabulary</a></li>
-                    <li><a href="#">Listening</a></li>
-                    <li><a href="#">Reading</a></li>
-                    <li><a href="#">Phrases</a></li>
-                </ul>
-            </div>
-            <!-- More Menu -->
-            <div class="collapse navbar-collapse" id="js-more-nav">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-expanded="false"><i class="md-more-vert"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Settings</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+            {{/owl-carousel}}
 
-            <!-- Search Menu -->
-            <div class="collapse navbar-collapse" id="js-search-nav">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-expanded="false"><i class="md-search"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><input type="text"></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
 
         </nav>
-</nav>
-
-<header class="title">
-    <div class="title__content">
-        <h1 class="fancy-type animated fadeInDown">Learn English</h1>
-
-        <h2>learn English, ask, practice and <a href="/discuss">discuss</a></h2>
-
-        <p>
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Sign up
-                now
-            </button>
-        </p>
+        {{outlet}}
     </div>
-</header>
 
-<div class="section categories">
-    <article class="container">
-        <div class="row text-center">
-            <h2><strong>2053</strong> lessons + 1 new English lesson every day</h2>
+</script>
+
+
+<script type='text/x-handlebars' data-template-name='girl'>
+
+
+    <div class="panel">
+        <div class="panel-image">
+            <img src="images/{{id}}.jpg">
         </div>
-        <div class="row">
-            <div class="col-md-6 col-lg-3">
-                <aside class="card card--category-grammar">
-                    <header><h2>Grammer</h2></header>
-                    <article>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse temporibus, unde. Aut
-                            consectetur,
-                            cum delectus dicta dolore ex facilis fugiat ipsa ipsam.</p>
-                    </article>
-                    <footer>
-                        <button class="btn">Play</button>
-                        <button class="btn">View lessons</button>
-                    </footer>
-                </aside>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <aside class="card card--category-vocab">
-                    <header><h2>Vocabulary</h2></header>
-                    <article>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse temporibus, unde. Aut
-                            consectetur,
-                            cum delectus dicta dolore ex facilis fugiat ipsa ipsam.</p>
-                    </article>
-                    <footer>
-                        <button class="btn">Play</button>
-                        <button class="btn">View lessons</button>
-                    </footer>
-                </aside>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <aside class="card card--category-listening">
-                    <header><h2>Listening</h2></header>
-                    <article>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse temporibus, unde. Aut
-                            consectetur,
-                            cum delectus dicta dolore ex facilis fugiat ipsa ipsam.</p>
-                    </article>
-                    <footer>
-                        <button class="btn">Play</button>
-                        <button class="btn">View lessons</button>
-                    </footer>
-                </aside>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <aside class="card card--category-reading">
-                    <header><h2>Reading</h2></header>
-                    <article>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse temporibus, unde. Aut
-                            consectetur,
-                            cum delectus dicta dolore ex facilis fugiat ipsa ipsam.</p>
-                    </article>
-                    <footer>
-                        <button class="btn">Play</button>
-                        <button class="btn">View lessons</button>
-                    </footer>
-                </aside>
-            </div>
+        <div class="panel-info">
+
+            <table>
+                <tr>
+                    <td>Pseudo</td>
+                    <td>{{nickname}}</td>
+                </tr>
+                <tr>
+                    <td>Age</td>
+                    <td>{{age}}</td>
+                </tr>
+                <tr>
+                    <td>Ville</td>
+                    <td>{{city}}</td>
+                </tr>
+                <tr>
+                    <td>Cherche</td>
+                    <td>{{lookfor}}</td>
+                </tr>
+            </table>
         </div>
-    </article>
-</div>
+        <form class="form">
+        {{textarea id="message" placeholder="Ecrire un message à Elodie..." required="required"}}
 
-
-<div class="section daily-question">
-    <article class="container">
-        <div class="row text-center">
-            <h2>Today's question</h2>
+        <div class="buttons">
+            <button {{action 'sendMessage'}}>Envoyer</button>
         </div>
-        <div class="table-row">
-            <div class="table-cell question">
+        </form>
 
-                <h3>Ways to say 'How are you?'</h3>
-                <ul class="rating">
-                    <li><i class="md-star-rate"></i></li>
-                    <li><i class="md-star-rate"></i></li>
-                    <li><i class="md-star-rate"></i></li>
-                    <li><i class="md-star-rate"></i></li>
-                    <li><i class="md-star-rate"></i></li>
-                </ul>
-                <div class="posted-by">
-                    Thu, 03/26/2015 - 08:32 — Chris McCarthy
-                </div>
-                <ul class="tags">
-                    <li><a href="#">Phrases</a></li>
-                    <li><a href="#">Vocabulary</a></li>
-                </ul>
-                <article>
-                    <p><em>How are you?<br>I'm fine, thank you.</em></p>
 
-                    <p><em>'I'm fine, thank you',</em> is an answer we use so often to this question that we don't
-                        really have to think about what we are going to say. The reply comes almost automatically
-                        whenever we hear it beinng asked to us.</p>
+    </div>
 
-                    <p>But how about if we ask the same question in a different way?</p>
 
-                    <p>All these questions mean '<strong>how are you</strong>?', but your task is decide which is the
-                        best response. There are many ways you can answer but only one is correct from the three
-                        possible replies.</p>
-                </article>
-            </div>
-            <div class="table-cell teacher-image">
-               <img src="images/teacher.png">
-            </div>
-        </div>
-    </article>
-</div>
+</script>
 
-<footer class="global">
+
+<script type='text/x-handlebars' data-template-name='thanks'>
     <div class="container">
-        &copy; 2015 Learn English
-    </div>
-</footer>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><div
-                        class="md-close"></div></span></button>
-                <h4 class="modal-title" id="myModalLabel">Register</h4>
+        <div class="panel panel--thanks">
+            <h2>Votre message a été envoyé à {{nickname}}</h2>
+            <h3>Récapitulatif de votre message :</h3>
+            <div class="post-message">
+                lorem ipsum lorem ipsum
+                lorem ipsum lorem ipsum
+                lorem ipsum lorem ipsum
+                lorem ipsum lorem ipsum
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            {{#link-to 'index' class='home-link'}}Home{{/link-to}}
         </div>
     </div>
-</div>
+</script>
 
-<!-- build:vendor scripts/vendor.js -->
+
+<!-- build:js scripts/app.bundle.js -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
-<script src="scripts/main-pre.js"></script>
-<!-- endbuild -->
-<!-- build:app scripts/main.js -->
 <script src="bower_components/owl-carousel2/dist/owl.carousel.js"></script>
+<script src="bower_components/ember/ember.min.js"></script>
+<script src="bower_components/ember/ember-template-compiler.js"></script>
+<script src="bower_components/ember-data/ember-data.min.js"></script>
+<script src="scripts/app.js"></script>
 <script src="scripts/main.js"></script>
 <!-- endbuild -->
 </body>

@@ -29,6 +29,8 @@
     "sass-material-colors": "~0.0.5",
     "susy": "~2.2.2",
     "material-shadows": "~2.0.1",
-    "animate": "git://github.com/geoffgraham/animate.scss"
+    "animate": "git://github.com/geoffgraham/animate.scss",
+    "ember": "~1.11.1",
+    "ember-data": "beta"
   }
 }

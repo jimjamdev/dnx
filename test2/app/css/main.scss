@@ -1,12 +1,18 @@
 @import "base";
 
-// Use animations
-$use-fadeInDown: true;
-
+// Some defaults ------------------
+*,*:before,*:after {
+  box-sizing: border-box;
+}
+html,body {
+  min-height: 100%;
+}
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  background-color: $white;
+  font-size: 16px;
+  background-color: $salmon;
+  background: linear-gradient($white 0%, $salmon 100%);
   -webkit-backface-visibility: hidden;
 }
 
@@ -14,147 +20,124 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
 }
 
-.title {
-  position: relative;
-  display: table;
-  padding: 110px 10px 70px 10px;
-  width: 100%;
-  background-color: $blue;
-  &__content {
-    display: table-cell;
-    vertical-align: middle;
-    color: $white;
-    text-align: center;
-    font-weight: 100;
-    h1, h2, h3, h4 {
-      color: $white;
-      font-weight: 300;
-    }
-    h1 {
-      @media (min-width: $screen-sm-min) {
-        font-size: 58px
-      }
-      @media (min-width: $screen-md-min) {
-        font-size: 68px
-      }
-    }
-    a {
-      color: $white;
-      text-decoration: underline;
-    }
-    .btn {
-      margin: 10px 0;
-    }
+.container {
+  @include container(90em);
+  padding-left: $pad;
+  padding-right: $pad;
+}
+
+// Links
+
+a {
+  color: $black;
+  &:hover {
+    text-decoration: none;
   }
 }
 
-// Sections
-.section.categories {
-  padding-bottom: 30px;
-}
-.section.daily-question {
-  position: relative;
-  background-color: #e0ffff;
-  .table-cell {
-    padding-bottom: 50px;
-  }
-  h2 {
-    margin-bottom: 30px;
-  }
-  .teacher-image {
-    position: relative;
-    & img {
-      display: none;
-      @media (min-width: $screen-md-min) {
-        display: block;
-        position: absolute;
-        bottom: 0;
-        right: 25%;
-        height: 400px;
-      }
+// Layout -----------------------
+
+/* Header */
+header {
+  text-align: center;
+  h1 {
+    color: $red;
+    @include font-size(2);
+    line-height: 1em;
+    @include medium {
+      @include font-size(3);
     }
-  }
-  .question {
-    //background-color: $white;
+    @include fadeInDown();
   }
 }
 
-// Cards
-
-.card--category-grammar {
-  @include card($green);
-}
-
-.card--category-vocab {
-  @include card($pink);
-}
-
-.card--category-listening {
-  @include card($blue);
-}
-
-.card--category-reading {
-   @include card($yellow);
+// Carousel
+.profiles {
+  padding: 0 0 2em 0;
+ @include large {
+   overflow: hidden;
  }
-.card--category-phrases {
-  @include card($pink);
+}
+.owl-theme {
+  padding-bottom: 10px;
+  .item {
+    img {
+      box-sizing:border-box;
+      border: solid 1px $black;
+      @include z-depth(1);
+    }
+  }
 }
 
-// Rating
-.rating {
-  @extend .clearfix;
-  float: left;
-  display: block;
-  padding:0;margin:0;list-style:none;
-  li {
-    padding:0;margin:0;list-style:none;
+
+// Panel
+
+.panel {
+  @extend %clearfix;
+  box-sizing: border-box;
+  @include container(40em);
+  background-color: $white;
+  background-color: rgba($white, 0.7);
+  padding: 15px;
+  @include medium {
+    padding: 50px;
+  }
+  border-radius: 5px;
+  border: solid 1px $black;
+  margin-bottom: 1em;
+  &--thanks {
+    margin-top:10%;
+    text-align: center;
+  }
+}
+
+.panel-image {
+  width: span(12 of 12);
+  @include medium {
     float: left;
+    width: span(3 of 12);
   }
-  i {
-    background: lightcyan;
-    border-radius: 50%;
-    color: $yellow;
-    font-size: 32px;
+  img {
+    @extend %responsive-img;
+    border: solid 1px $red;
+    max-width: 200px;
+    margin-bottom: $pad;
+}
+}
+.panel-info {
+  width: span(12 of 12);
+  margin-bottom: $pad;
+  @include medium {
+    float: right;
+    width: span(8 of 12);
   }
 }
 
-// Tags
-.tags {
-  @extend .clearfix;
-  padding:0;margin:0;list-style:none;
-  li {
-    padding:0;margin:0;list-style:none;
-    float: left;
-    margin-right: 5px;
-  }
-  a {
-    display: inline-block;
-    background-color: $blue;
-    color: $white;
-    border-radius: 3px;
-    padding: 3px 10px;
-  }
+.buttons {
+  text-align: right;
 }
 
-// Table layout
-.table-row {
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 120px;
+  padding:10px;
+  margin: 0 0 10px 0;
+  border: solid 1px $black;
+  color: $black;
+  @include medium {
+    @include font-size(1.5);
+  }
+}
+textarea::placeholder  {
+  color: $black
+}
+
+.home-link, .post-message {
+  color: $red;
+}
+
+.home-link {
   display: block;
-  @media (min-width: $screen-md-min) {
-    display: table;
-  }
-}
-.table-cell {
-  @media (min-width: $screen-md-min) {
-    display: table-cell;
-    vertical-align: middle;
-    width: 50%;
-  }
-}
-
-
-// Footer
-footer.global {
-  color: $white;
-  background-color: $blue;
-  padding: 10px 0px;
+  padding: 10px;
 }

@@ -26,3 +26,27 @@
   height: auto;
   margin: 0 auto;
 }
+
+// Reset lists
+%reset-list {
+  margin:0;
+  padding:0;
+  list-style: none;
+}
+
+// Placeholders
+
+@mixin placeholder {
+  ::-webkit-input-placeholder {
+    @content;
+  }
+  :-moz-placeholder {
+    @content;
+  }
+  ::-moz-placeholder {
+    @content;
+  }
+  :-ms-input-placeholder {
+    @content;
+  }
+}

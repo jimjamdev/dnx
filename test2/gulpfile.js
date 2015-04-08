@@ -44,11 +44,13 @@ var minifyHTML = require('gulp-minify-html');
 var usemin = require('gulp-usemin');
 var del = require('del');
 var rev = require('gulp-rev');
+var plumber = require('gulp-plumber');
+var gulpif = require('gulp-if');
 //var nodemon = require('gulp-nodemon');
 
 // Templates
-var htmlbars = require('gulp-htmlbars');
-var wrap = require('gulp-wrap-amd');
+//var htmlbars = require('gulp-htmlbars');
+//var wrap = require('gulp-wrap-amd');
 
 // =============================
 // Server
@@ -71,10 +73,16 @@ gulp.task('styles', ['scss', 'critical-css']);
 
 gulp.task('scss', function () {
     gulp.src('app/css/*.scss')
+        .pipe(plumber())
         .pipe(sass())
         .pipe(autoprefixer('last 3 version'))
         .pipe(cmq({
             log: true
+        }))
+        .pipe(uncss({
+            html: ['app/index.html'],
+            ignore: [/js/, /offcanvas/, /active/, /hover/, /scroll/, /focus/, /placeholder/, /owl/],
+            media: ['*']
         }))
         .pipe(cssmin())
         .pipe(gulp.dest('./app/css'))
@@ -82,20 +90,18 @@ gulp.task('scss', function () {
         .pipe(size());
 });
 
-gulp.task('un-css', function () {
-    gulp.src('./app/css/*.css')
-        .pipe(uncss({
-            html: ['app/index.html'],
-            ignore: [/js/, /offcanvas/, /active/, /hover/, /scroll/, /focus/],
-            media: ['*']
-        }))
-        .pipe(cssmin())
-        .pipe(gulp.dest('./app/css/'))
-        .pipe(size());
-});
 
 gulp.task('critical-css', function () {
-
+    critical.generateInline({
+        base: 'public/',
+        src: 'index.html',
+        css: ['app/css/main.css'],
+        dest: 'styles/main.css',
+        htmlTarget: 'index.html',
+        width: 960,
+        height: 400,
+        minify: true
+    });
 });
 
 // =============================
@@ -104,6 +110,7 @@ gulp.task('critical-css', function () {
 
 gulp.task('scripts', function () {
     return gulp.src('app/scripts/**/*.js')
+        .pipe(plumber())
         .pipe(uglify())
         .pipe(size())
 });
@@ -112,37 +119,20 @@ gulp.task('scripts', function () {
 // HTML
 // =============================
 
+
 gulp.task('html', function () {
-    return gulp.src('app/*.html')
-        .pipe(minifyHTML(htmlOptions))
-        .pipe(gulp.dest('./public'))
-});
-
-gulp.task('build-html', ['copy-bower-components','styles', 'scripts'], function () {
-    var jsFilter = filter('**/*.js');
-    var cssFilter = filter('**/*.css');
-
-    var assets = useref.assets();
+    var assets = useref.assets({searchPath: ['.tmp', 'app', '.']});
 
     return gulp.src('app/*.html')
         .pipe(assets)
-        .pipe(jsFilter)
-        .pipe(uglify())
-        .pipe(jsFilter.restore())
-        .pipe(cssFilter)
-        .pipe(csso())
-        .pipe(cssFilter.restore())
+        .pipe(gulpif('*.js', uglify()))
+        .pipe(gulpif('*.css', csso()))
         .pipe(assets.restore())
-        .pipe(usemin({
-            css: [cssmin(), 'concat'],
-            html: [minifyHTML({empty: true})],
-            vendor: [uglify(), rev()],
-            app: [uglify(), rev()]
-        }))
-        .pipe(minifyHTML(htmlOptions))
-        .pipe(gulp.dest('public'))
-        .pipe(size())
+        .pipe(useref())
+        .pipe(gulpif('*.html', minifyHTML({conditionals: true, loose: true})))
+        .pipe(gulp.dest('public'));
 });
+
 
 // =============================
 // Assets: Fonts, Images, SVG
@@ -150,6 +140,7 @@ gulp.task('build-html', ['copy-bower-components','styles', 'scripts'], function 
 
 gulp.task('fonts', function () {
     return gulp.src('./**/*')
+        .pipe(plumber())
         .pipe(filter('**/*.{eot,ttf,woff}'))
         .pipe(flatten())
         .pipe(gulp.dest('app/fonts'))
@@ -159,6 +150,7 @@ gulp.task('fonts', function () {
 
 gulp.task('images',['svg2png'], function () {
     return gulp.src('./app/images/**/*')
+        .pipe(plumber())
         .pipe(filter('**/*.{png,svg,jpg,gif}'))
         .pipe(flatten())
         .pipe(imagemin({
@@ -171,6 +163,7 @@ gulp.task('images',['svg2png'], function () {
 
 gulp.task('svg2png', function () {
     gulp.src('./app/images/**/*.svg')
+        .pipe(plumber())
         .pipe(svg2png())
         .pipe(gulp.dest('public/images'))
 });
@@ -229,4 +222,4 @@ gulp.task('init', ['fonts', 'images']);
 gulp.task('default', ['watch']);
 
 // Use this task to build the project
-gulp.task('build', ['build-html', 'fonts', 'images']);
+gulp.task('build', ['html', 'fonts', 'images']);
